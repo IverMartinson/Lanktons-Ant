@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-const int width = 300;
-const int height = 300;
+const int width = 800;
+const int height = 800;
 
 enum Direction {
     up,
@@ -21,7 +21,7 @@ int main(){
  
     if(SDL_Init(SDL_INIT_VIDEO) != 0) printf("init failed\n");
 
-	SDL_Window *window = SDL_CreateWindow("Lanktons Ant", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+	SDL_Window *window = SDL_CreateWindow("Lankton's Ant", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
 	if (!window) printf("window failed\n");
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) printf("renderer failed\n");
