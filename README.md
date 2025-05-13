@@ -2,7 +2,7 @@
 ### The Lankton's Ant program written in C 
 #### How to run
 1. Download the binary or compile from source
-2. Run it in the CMD line or from a file browser (if you're in the CMD line you can use `--randomize` to randomize the cells or `--trace` to trace the ant's path)
+2. Run it in the CMD line or from a file browser (if you're in the CMD line you can use `--randomize` to randomize the cells and/or `--trace` to trace the ant's path)
 
 #### How to compile
 1. Download SDL2 (libsdl2-dev from apt)
