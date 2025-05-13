@@ -9,13 +9,12 @@
 2. Compile with any C compiler
 
 #### Example compiler command
-`gcc main.c -o main -lc -lSDL2 -Ofast`
+`gcc main.c -o main -lc -lSDL2`
 - gcc: the GCC compiler
 - main.c: input file
 - -o main: call the binary "main"
 - -lc: link the C library
 - -lSDL2: link the SDL2 library
-- -Ofast: use the fastest optimizations
 
 #### What should I edit in the source?
 - Window dimensions
