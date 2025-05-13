@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <SDL2/SDL.h>
 
 const int width = 800;
@@ -11,7 +13,26 @@ enum Direction {
     down,
 };
 
-int main(){
+int main(int arg_count, char* args[]){
+	srand(time(NULL));
+
+	int trace = 0;
+	int randomize = 0;
+
+	for (int arg = 1; arg < arg_count; arg++){
+		if (strcmp(args[arg], "--trace")){
+			randomize = 1;
+		}
+		
+		else if (strcmp(args[arg], "--randomize")){
+			trace = 1;
+		}
+
+		else {
+			printf("unknown arg \"%s\"", args[arg]);
+		}
+	}
+
     int x = width / 2;
     int y = height / 2;
 
@@ -28,10 +49,24 @@ int main(){
 	SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
     if (!texture) printf("texture failed\n");
 
+	int ant_buffer[width * height];
+
 	Uint32 frame_buffer[width * height];
 
     for (int i = 0; i < width * height; i++){
-        frame_buffer[i] = 0xFFFFFFFF;
+		if (randomize){
+			ant_buffer[i] = rand() % 2;
+		}
+		else {
+			ant_buffer[i] = 1;
+		}
+		
+        if (trace || !randomize){
+        	frame_buffer[i] = 0xFFFFFFFF;
+		}
+		else{
+        	frame_buffer[i] = rand() % 2 * 0xFFFFFFFF;			
+		}
     }
 
 	int running = 1;
@@ -51,8 +86,11 @@ int main(){
 
         // if black, go left
         // if white, go right
-        if (!frame_buffer[y * width + x]){
-            frame_buffer[y * width + x] = 0xFFFFFFFF;
+        if (!ant_buffer[y * width + x]){
+            ant_buffer[y * width + x] = 1;
+
+	        if (!trace)
+	        	frame_buffer[y * width + x] = 0xFFFFFFFF; 
             
             switch (direction){
                 case up:
@@ -77,7 +115,10 @@ int main(){
             }
         }
         else {
-            frame_buffer[y * width + x] = 0;
+            ant_buffer[y * width + x] = 0;
+
+        	if (!trace)
+        		frame_buffer[y * width + x] = 0;
             
             switch (direction){
                 case up:
@@ -101,6 +142,9 @@ int main(){
                     break;
             }
         }
+
+        if (trace)
+        	frame_buffer[y * width + x] = 0; 
 
         if (frame % 10 != 0)
         	continue;
