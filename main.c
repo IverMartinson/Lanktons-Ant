@@ -19,6 +19,8 @@ int main(int arg_count, char* args[]){
 	int trace = 0;
 	int randomize = 0;
 
+	int skipped_frames = 10;
+
 	for (int arg = 1; arg < arg_count; arg++){
 		if (strcmp(args[arg], "--trace")){
 			randomize = 1;
@@ -146,7 +148,7 @@ int main(int arg_count, char* args[]){
         if (trace)
         	frame_buffer[y * width + x] = 0; 
 
-        if (frame % 10 != 0)
+        if (frame % skipped_frames != 0)
         	continue;
 
         SDL_UpdateTexture(texture, NULL, frame_buffer, width * sizeof(Uint32));
