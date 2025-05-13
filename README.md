@@ -8,7 +8,8 @@
 1. Download SDL2 (libsdl2-dev from apt)
 2. Compile with any C compiler
 
-#### Example compiler command: `gcc main.c -o main -lc -lSDL2 -Ofast`
+#### Example compiler command
+`gcc main.c -o main -lc -lSDL2 -Ofast`
 - gcc: the GCC compiler
 - main.c: input file
 - -o main: call the binary "main"
